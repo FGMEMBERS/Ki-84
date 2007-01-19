@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+Nakajima Ki-84 Type 4 Fighter "Hayate" (a.k.a. Frank)
+Author: Tat Nishioka
+************************************************************************
+References
+[1] "Japanese Aircraft" by Edward T. Maloney, Planes of Fame publications
+
+# commented-out parameters are for A6M2, and should be revised
+************************************************************************
+[Engine: Nakajima - Ha-45 (Homare) 18-cylinder radial Engine]
+Spec: 1900 hp @ 3000 rpm
+Takeoff power: 1900 hp
+Maximum power: 1900 hp @ 6000 m (19685 ft)
+
+# based on A6M2; should be revised 
+# Bore: 130 mm (5.1in)
+# Stroke: 150 mm (5.9 in)
+Displacement: 36 L (2,197 cubic in)
+Compression: 7.0
+Engine weight: 533kg (1,175 lb)
+************************************************************************
+[Performance]
+
+Maximum speed: 340 kt (629 km/h, 391 mph) @ 6000 m (19685 ft)
+Never exceed speed: 392 kt (800 km/h, 496 mph)
+
+Rate of climb: 19.25 m/s (3789 ft/min)
+Power weight ratio: 410 W/kg (0.59 hp/kg, 0.25 hp/lb)
+Wing loading: 172kg/sq m ( lb/sq ft) 
+#Normal range: 1870 km (1010 nm, 1162 mi) 
+#Maximum range: 3105 km (1675 nm, 1930 mi) 
+Service Ceiling: 10500 m (34450 ft)
+#Stalling speed:
+  74 kt (136 km/h 85 mph) ; power off, wheels and flaps up
+  67 kt (125 km/h 78 mph) ; power off, wheels and flaps down
+  56 kt (104 km/h 65 mph) ; power on,  wheels and flaps down
+************************************************************************
+[Propeller: constant speed 4-blade propeller]
+
+
+***************************************
+[Weight]
+Empty : 5,875 lbs (2,665 kg)
+Loaded: 7,972 lbs (3,616 kg)
+Max   : 8,594 lbs (3,898 kg)
+
+************************************
+[Measurement]
+Length 9.93 m (32 ft 7 in)
+Height  3.38 (10 ft 1 in)
+Wing span 11.23 m  (36 ft 11 in)
+Wing aspect ratio 6.42
+Wing area 229 sq ft (21.27 sq m)
+
+Chord and Dihedral:
+Chord @ root: 2.81 m
+Chord @ tip: 1.52 m
+# Dihedral:
+
+*********************************
+Fuel capacity:
+Main: 590L (156 US gal)
+Drop: 87 US gal
+
+-->
+
+<!-- Weight of everything but fuel -->
+<airplane mass="5875">
+
+  <!-- Approach configuration -->
+  <approach speed="70" aoa="7">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="0.3"/>
+    <control-setting axis="/controls/engines/engine[0]/mixture" value="0.55"/>
+    <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.6"/>
+    <control-setting axis="/controls/engines/engine[0]/boost" value="0.0"/>
+    <control-setting axis="/controls/flight/flaps" value="1.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="1"/>
+  </approach>
+
+  <!-- Cruise configuration -->
+  <!-- Top speed; 340kt @ 6000 m (19685 ft) -->
+  <cruise speed="340" alt="19685">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="1.0"/>
+    <control-setting axis="/controls/engines/engine[0]/mixture" value="1.0"/>
+    <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="1.0"/>
+    <control-setting axis="/controls/engines/engine[0]/boost" value="1.0"/>
+    <control-setting axis="/controls/flight/flaps" value="0.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0"/>
+  </cruise>
+
+  <!-- pilot's eyepoint -->
+  <cockpit x="0.90" y="0" z="0.974"/>
+
+  <fuselage ax="2.34" ay="0.0" az="0.0" bx="-6.37" by="0.0" bz="0.3"
+	    width="0.8" taper="0.3" midpoint="0.2"/>
+
+  <!--
+      Wing characteristics
+      Sweep and twist are 'guesstimate'
+    -->
+  <wing x="0.0" y="0.4" z="-0.53" taper="0.54" incidence="0.06"
+	length="5.62" chord="2.81" sweep="0.1" dihedral="6.0" camber="0.1" twist="0.2" idrag="1.25">
+    <stall aoa="14" width="12" peak="1.5"/>
+    <flap0 start="0.0" end="0.4" lift="1.7" drag="1.9"/>
+    <flap1 start="0.4" end="1.0" lift="1.4" drag="1.1"/>
+    <control-input axis="/controls/flight/flaps" control="FLAP0"/>
+    <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>
+    <control-speed control="FLAP0" transition-time="7"/>
+    <control-input axis="/controls/flight/aileron" control="FLAP1" split="true"/>
+    <control-output control="FLAP1" side="left"
+		    prop="surface-positions/left-aileron-pos-norm"/>
+    <control-output control="FLAP1" side="right"
+		    prop="surface-positions/right-aileron-pos-norm"/>
+    <control-speed control="FLAP1" transition-time="1"/>
+    <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
+  </wing>
+
+  <!-- start and end point are changed to avoid "insufficient elevator to trim for approach" -->
+  <!-- length=2.06, chord =1.22 -->
+  <hstab x="-4.76" y="0.22" z="0.46" taper="0.439" 
+	 length="2.06" chord="1.22" sweep="0" incidence="1.0" effectiveness="2.5">
+    <stall aoa="17" width="16" peak="1.5"/>
+    <flap0 start="0.0" end="1.6" lift="1.55" drag="1.3"/>
+    <control-input axis="/controls/flight/elevator" control="FLAP0"/>
+    <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
+    <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+  </hstab>
+
+  <vstab x="-5.37" y="0" z="-0.6" taper="0.5" effectiveness="3.0"
+	 length="1.43" chord="1.7" sweep="15" incidence="-0.30">
+    <stall aoa="15" width="4" peak="1.5"/>
+    <flap0 start="0" end="1" lift="1.3" drag="1.3"/>
+    <control-input axis="/controls/flight/rudder" square="true" control="FLAP0" invert="true"/>
+    <control-input axis="/controls/flight/rudder-trim" control="FLAP0" invert="true"/>
+    <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"
+		    min="1" max="-1"/>
+  </vstab>
+
+  <!-- 
+    Propeller characteristics
+    mass is the weight of the engine. I don't know the weight of the propeller.
+    curise rpm=max_rpm * gear_ratio, takeoff-rpm=max_rpm * gear_ratio * max_power / take-off_power (estimate)
+    -->
+  <propeller   x="1.8" y="0" z="0"
+               radius="1.56"
+               mass="1650" moment="95.6"
+               cruise-alt="19685" cruise-power="1970"
+               cruise-speed="340" cruise-rpm="1749"
+               takeoff-power="1900" takeoff-rpm="1686"
+               gear-ratio="0.5833"
+               fine-stop="0.9"
+               min-rpm="583" max-rpm="1749"
+	       >
+    <actionpt x="2.48" y="0" z="0"/>
+    <control-input axis="/controls/engines/engine[0]/propeller-pitch" control="ADVANCE" />
+    <!-- turbo-mul and wastegate-mp are set to +250mmHg (1.33 bar) -->
+    <!--
+       compression="7.0" displacement="2197"
+      -->
+    <piston-engine
+       eng-power="1970" eng-rpm="3000"
+       turbo-mul="1.333" wastegate-mp="39.372"
+       supercharger="1"
+       >
+      <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
+      <control-input axis="/controls/engines/engine[0]/starter" control="STARTER"/>
+      <control-input axis="/controls/engines/engine[0]/magnetos" control="MAGNETOS"/>
+      <control-input axis="/controls/engines/engine[0]/mixture" control="MIXTURE"/>
+      <control-input axis="/controls/engines/engine[0]/boost" control="BOOST"/>
+    </piston-engine>
+  </propeller>
+
+
+  <!-- left main -->
+  <gear x="0.64" y="1.64" z="-1.96" compression="0.2" spring="0.7" damp="2.2"
+	dfric="0.06" sfric ="0.10">
+    <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-speed control="EXTEND" transition-time="6"/>
+    <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
+  </gear>
+
+  <!-- right main -->
+  <gear x="0.64" y="-1.64" z="-1.96" compression="0.2" spring="0.7" damp="2.2"
+	dfric="0.06" sfric ="0.10">
+    <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-speed control="EXTEND" transition-time="8"/>
+    <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
+  </gear>
+
+  <!-- Tail wheel -->
+  <gear x="-4.91" y="0" z="-0.48" compression="0.1" castering="1"
+	dfric="0.3" sfric ="0.40">
+    <control-input axis="/controls/gear/tailwheel-lock" src0="0" src1="1"
+                   dst0="1" dst1="0" control="CASTERING"/>
+    <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-speed control="EXTEND" transition-time="4"/>
+    <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
+    src0="-1.0" src1="1.0"
+    dst0="0.5" dst1="-0.5"/>
+  </gear>
+
+  <hook x="-4.00" y="0.0" z="-0.400" length="1.32" down-angle="40" up-angle="-5"> 
+    <control-input axis="/controls/gear/tailhook" control="HEXTEND"/>
+    <control-speed control="HEXTEND" transition-time="3"/>
+  </hook>
+
+  <launchbar    x="2.2" y="0.0" z="-0.79"
+		length="1.470" 
+		down-angle="90"
+		up-angle="0"
+		holdback-x="-4.60" holdback-y="0.0" holdback-z="-0.44" 
+		holdback-length="1.65">
+    <control-input axis="/controls/gear/launchbar" control="LEXTEND"/>
+    <control-speed control="LEXTEND" transition-time="1"/>
+  </launchbar>
+
+  <tank x="-0.0" y="1.15" z="-0.297" capacity="482.5"/> 
+  <tank x="-0.0" y="-1.15" z="-0.297" capacity="482.5"/> 
+
+  <!-- pilot -->
+  <ballast x="-0.5" y="0" z="-0.3" mass="180"/>
+  <ballast x="1.5" y="0" z="-0.0." mass="350"/>
+</airplane>
