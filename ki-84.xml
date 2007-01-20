@@ -7,6 +7,7 @@ Author: Tat Nishioka
 ************************************************************************
 References
 [1] "Japanese Aircraft" by Edward T. Maloney, Planes of Fame publications
+[2] http://www.warbirds.jp/kakuki/sanko/en_japan.htm (Japanese)
 
 # commented-out parameters are for A6M2, and should be revised
 ************************************************************************
@@ -15,12 +16,11 @@ Spec: 1900 hp @ 3000 rpm
 Takeoff power: 1900 hp
 Maximum power: 1900 hp @ 6000 m (19685 ft)
 
-# based on A6M2; should be revised 
-# Bore: 130 mm (5.1in)
-# Stroke: 150 mm (5.9 in)
-Displacement: 36 L (2,197 cubic in)
-Compression: 7.0
-Engine weight: 533kg (1,175 lb)
+Bore: 130 mm (5.1in)
+Stroke: 150 mm (5.9 in)
+Displacement: 35.8 L (2,185 cubic in)
+Compression: 8.0
+Engine weight: 900 kg (1,984 lb)
 ************************************************************************
 [Performance]
 
@@ -71,7 +71,7 @@ Drop: 87 US gal
 <airplane mass="5875">
 
   <!-- Approach configuration -->
-  <approach speed="70" aoa="7">
+  <approach speed="70" aoa="9">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="0.3"/>
     <control-setting axis="/controls/engines/engine[0]/mixture" value="0.55"/>
     <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.6"/>
@@ -94,16 +94,16 @@ Drop: 87 US gal
   <!-- pilot's eyepoint -->
   <cockpit x="0.90" y="0" z="0.974"/>
 
-  <fuselage ax="2.34" ay="0.0" az="0.0" bx="-6.37" by="0.0" bz="0.3"
-	    width="0.8" taper="0.3" midpoint="0.2"/>
+  <fuselage ax="-3.27" ay="0.0" az="0.0" bx="5.74" by="0.0" bz="0.3"
+	    width="1.06" taper="0.3" midpoint="0.2"/>
 
   <!--
       Wing characteristics
       Sweep and twist are 'guesstimate'
     -->
-  <wing x="0.0" y="0.4" z="-0.53" taper="0.54" incidence="0.06"
-	length="5.62" chord="2.81" sweep="0.1" dihedral="6.0" camber="0.1" twist="0.2" idrag="1.25">
-    <stall aoa="14" width="12" peak="1.5"/>
+  <wing x="0.0" y="2.33" z="-0.33" taper="0.54" incidence="0.06"
+	length="5.0" chord="2.81" sweep="0.1" dihedral="6.0" camber="0.1" twist="0.2" idrag="1.25">
+    <stall aoa="14" width="5" peak="1.5"/>
     <flap0 start="0.0" end="0.4" lift="1.7" drag="1.9"/>
     <flap1 start="0.4" end="1.0" lift="1.4" drag="1.1"/>
     <control-input axis="/controls/flight/flaps" control="FLAP0"/>
@@ -122,7 +122,7 @@ Drop: 87 US gal
   <!-- length=2.06, chord =1.22 -->
   <hstab x="-4.76" y="0.22" z="0.46" taper="0.439" 
 	 length="2.06" chord="1.22" sweep="0" incidence="1.0" effectiveness="2.5">
-    <stall aoa="17" width="16" peak="1.5"/>
+    <stall aoa="17" width="8" peak="1.5"/>
     <flap0 start="0.0" end="1.6" lift="1.55" drag="1.3"/>
     <control-input axis="/controls/flight/elevator" control="FLAP0"/>
     <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
@@ -151,8 +151,8 @@ Drop: 87 US gal
                cruise-speed="340" cruise-rpm="1749"
                takeoff-power="1900" takeoff-rpm="1686"
                gear-ratio="0.5833"
-               fine-stop="0.9"
                min-rpm="583" max-rpm="1749"
+               fine-stop="0.9"
 	       >
     <actionpt x="2.48" y="0" z="0"/>
     <control-input axis="/controls/engines/engine[0]/propeller-pitch" control="ADVANCE" />
@@ -174,9 +174,10 @@ Drop: 87 US gal
   </propeller>
 
 
-  <!-- left main -->
-  <gear x="0.64" y="1.64" z="-1.96" compression="0.2" spring="0.7" damp="2.2"
-	dfric="0.06" sfric ="0.10">
+  <!-- left main x=0.64, y=1.64 actually-->
+  
+  <gear x="0.54" y="1.74" z="-1.96" compression="0.3" spring="0.7" damp="3.4"
+	dfric="0.6" sfric ="0.70">
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
@@ -185,12 +186,12 @@ Drop: 87 US gal
   </gear>
 
   <!-- right main -->
-  <gear x="0.64" y="-1.64" z="-1.96" compression="0.2" spring="0.7" damp="2.2"
-	dfric="0.06" sfric ="0.10">
+  <gear x="0.54" y="-1.74" z="-1.96" compression="0.3" spring="0.7" damp="3.4"
+	dfric="0.6" sfric ="0.70">
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
-    <control-speed control="EXTEND" transition-time="8"/>
+    <control-speed control="EXTEND" transition-time="6"/>
     <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   </gear>
 
@@ -200,6 +201,9 @@ Drop: 87 US gal
     <control-input axis="/controls/gear/tailwheel-lock" src0="0" src1="1"
                    dst0="1" dst1="0" control="CASTERING"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+    <control-input axis="/controls/flight/rudder" control="STEER" square="true" 
+                   src0="-1.0" src1="1.0"
+                   dst0="0.5" dst1="-0.5"/>
     <control-speed control="EXTEND" transition-time="4"/>
     <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
     src0="-1.0" src1="1.0"

@@ -225,8 +225,8 @@ Jan. 10 Tat Nishioka
  </input>
  <nasal>
     <Ki-84>
-    <file>Aircraft/A6M2/Nasal/electrical.nas</file>
-    <file>Aircraft/A6M2/Nasal/a6m2.nas</file>
+    <file>Aircraft/Ki-84/Nasal/electrical.nas</file>
+    <file>Aircraft/Ki-84/Nasal/a6m2.nas</file>
     </Ki-84>
 </nasal>
 
