@@ -201,9 +201,15 @@ Drop: 87 US gal
     <control-input axis="/controls/gear/tailwheel-lock" src0="0" src1="1"
                    dst0="1" dst1="0" control="CASTERING"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+<!--
+   Though Hayate doesn't have steerable tailwheel, you can uncoment below
+   to enable it for easy taxing.
+-->
+<!--
     <control-input axis="/controls/flight/rudder" control="STEER" square="true" 
                    src0="-1.0" src1="1.0"
                    dst0="0.5" dst1="-0.5"/>
+-->
     <control-speed control="EXTEND" transition-time="4"/>
     <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
     src0="-1.0" src1="1.0"
@@ -223,7 +229,7 @@ Drop: 87 US gal
 		holdback-length="1.65">
     <control-input axis="/controls/gear/launchbar" control="LEXTEND"/>
     <control-speed control="LEXTEND" transition-time="1"/>
-  </launchbar>
+   </launchbar>
 
   <tank x="-0.0" y="1.15" z="-0.297" capacity="482.5"/> 
   <tank x="-0.0" y="-1.15" z="-0.297" capacity="482.5"/> 

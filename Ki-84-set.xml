@@ -123,6 +123,11 @@ Jan. 10 Tat Nishioka
    </engines>
    <gear>
      <brake-parking>1</brake-parking>
+     <!-- 
+          Hayate doesn't have a lockable tailwheel. 
+          change this to true when you use keyboard.
+      -->
+     <tailwheel-lock>false</tailwheel-lock>
    </gear>
  </controls>
  
@@ -177,6 +182,29 @@ Jan. 10 Tat Nishioka
             <command>property-toggle</command>
             <property>controls/gear/tailwheel-lock</property>
           </binding>
+      </key>
+      <key n="78"> 
+        <name>N</name>
+        <desc>Propeller Coarse.</desc>
+        <binding> 
+          <command>property-adjust</command>
+          <property>/controls/engines/engine/propeller-pitch</property>
+          <step type="double">0.1</step>
+          <min type="double">-1.0</min>
+          <max type="double">1.0</max>
+        </binding>
+      </key>
+
+      <key n="110"> 
+        <name>n</name>
+        <desc>Propeller Fine.</desc>
+        <binding> 
+          <command>property-adjust</command>
+          <property>/controls/engines/engine/propeller-pitch</property>
+          <step type="double">-0.1</step>
+          <min type="double">-1.0</min>
+          <max type="double">1.0</max>
+        </binding>
       </key>
 <!--
         <key n="79"> 
