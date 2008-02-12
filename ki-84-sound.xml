@@ -16,7 +16,7 @@
   <crank>
    <name>crank</name>
    <mode>looped</mode>
-   <path>Aircraft/dhc2/Sound/starter.wav</path>
+   <path>Aircraft/p51d/Sounds/p51d_starter.wav</path>
    <condition>
     <property>/engines/engine/cranking</property>
     <not>
