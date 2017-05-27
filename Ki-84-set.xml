@@ -13,6 +13,23 @@ Jan. 10 Tat Nishioka
   <startup>
     <splash-texture>Aircraft/Ki-84/splash.rgb</splash-texture>
   </startup>
+
+    <tags>
+      <tag>nakajima</tag>
+      <tag>low-wing</tag>
+      <tag>tail-dragger</tag>
+      <tag>retractable-gear</tag>
+      <tag>castering-wheel</tag>
+      <tag>single-engine</tag>
+      <tag>piston</tag>
+      <tag>supercharger</tag>
+      <tag>fighter</tag>
+      <tag>radial</tag>
+      <tag>supercharged</tag>
+      <tag>1940s</tag>
+      <tag>ww2</tag>
+    </tags>
+     
   
   <flight-model>yasim</flight-model>
   <aero>ki-84</aero>
